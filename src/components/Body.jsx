@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [showButtons, setShowButtons] = useState(true);
+
   return (
     <section>
       <div className="home-section" id="home">
@@ -26,6 +29,16 @@ const Home = () => {
         </div>
       </div>
       <AboutSection />
+      {showButtons && (
+        <div className="navigation-buttons">
+          <Link to="/table" className="nav-button">
+            Go to Table
+          </Link>
+          <Link to="/dashboard" className="nav-button">
+            Go to Dashboard
+          </Link>
+        </div>
+      )}
     </section>
   );
 };
