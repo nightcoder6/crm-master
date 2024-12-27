@@ -1,122 +1,147 @@
 import React, { useState } from "react";
 
 const MessengerDashboard = () => {
-  // Sample data for jobs
   const [jobs, setJobs] = useState([
-    { id: 1, title: "Deliver Package A", status: "Assigned", completionLink: "", netPayable: 50 },
-    { id: 2, title: "Deliver Package B", status: "Assigned", completionLink: "", netPayable: 30 },
-    { id: 3, title: "Deliver Package B", status: "Assigned", completionLink: "", netPayable: 30 },
-    { id: 4, title: "Deliver Package B", status: "Assigned", completionLink: "", netPayable: 30 },
-    { id: 5, title: "Deliver Package B", status: "Assigned", completionLink: "", netPayable: 30 },
+    { id: 1, job: "Create a YouTube campaign targeting Congress voters", description: "Develop a video campaign showcasing key achievements and policy promises of the Congress party. Target audience: young professionals.", status: "Assigned", amount: 500, completionLink: "" },
+    { id: 2, job: "Manage Twitter engagement for regional elections", description: "Coordinate tweet schedules and engagement strategies for the upcoming regional elections. Focus on hashtags and trending topics.", status: "Assigned", amount: 300, completionLink: "" },
+    { id: 3, job: "Design Instagram posts for candidate promotion", description: "Create visually appealing Instagram posts highlighting the key qualities of the candidate and their manifesto promises.", status: "Assigned", amount: 200, completionLink: "" },
+    { id: 4, job: "Analyze opposition party digital campaigns", description: "Review and analyze the social media campaigns of opposition parties and provide insights for counter-strategies.", status: "Assigned", amount: 400, completionLink: "" },
+    { id: 5, job: "Draft Facebook posts to boost engagement", description: "Write engaging Facebook posts for public engagement and highlight key campaign promises.", status: "Assigned", amount: 250, completionLink: "" },
+    { id: 6, job: "Develop a WhatsApp strategy for voter outreach", description: "Plan and execute a WhatsApp outreach strategy to connect with voters and share personalized messages.", status: "Assigned", amount: 350, completionLink: "" },
   ]);
 
-  const [withdrawnAmount, setWithdrawnAmount] = useState(0);
+  const [totalEarnings, setTotalEarnings] = useState(0);
+  const [expandedJobId, setExpandedJobId] = useState(null);
+  const [acceptedJobs, setAcceptedJobs] = useState([]);
+  const [completedJobs, setCompletedJobs] = useState([]);
 
-  // Handle job acceptance
-  const handleAccept = (jobId) => {
+  const handleAcceptJob = (id) => {
     setJobs((prevJobs) =>
       prevJobs.map((job) =>
-        job.id === jobId ? { ...job, status: "Accepted" } : job
+        job.id === id ? { ...job, status: "Accepted" } : job
       )
     );
+    const acceptedJob = jobs.find((job) => job.id === id);
+    setAcceptedJobs((prev) => [...prev, acceptedJob]);
   };
 
-  // Handle job rejection
-  const handleReject = (jobId) => {
-    setJobs((prevJobs) =>
-      prevJobs.filter((job) => job.id !== jobId) // Remove the rejected job
-    );
-    alert("Job rejected successfully!");
+  const handleCompleteJob = (id) => {
+    const updatedJobs = jobs.map((job) => {
+      if (job.id === id) {
+        return { ...job, status: "Completed" };
+      }
+      return job;
+    });
+    setJobs(updatedJobs);
+
+    const completedJob = jobs.find((job) => job.id === id);
+    setCompletedJobs((prev) => [...prev, completedJob]);
+    setAcceptedJobs((prev) => prev.filter((job) => job.id !== id));
+    setTotalEarnings((prevTotal) => prevTotal + completedJob.amount);
   };
 
-  // Handle completion link submission
-  const handleCompletion = (jobId, link) => {
+  const handleRejectJob = (id) => {
     setJobs((prevJobs) =>
       prevJobs.map((job) =>
-        job.id === jobId
-          ? { ...job, status: "Completed", completionLink: link }
-          : job
+        job.id === id ? { ...job, status: "Rejected" } : job
       )
     );
+    setAcceptedJobs((prev) => prev.filter((job) => job.id !== id));
   };
 
-  // Handle money withdrawal
-  const handleWithdraw = () => {
-    const totalPayable = jobs.reduce((acc, job) => acc + job.netPayable, 0);
-    setWithdrawnAmount((prev) => prev + totalPayable);
+  const handleLinkChange = (id, link) => {
     setJobs((prevJobs) =>
-      prevJobs.map((job) => ({ ...job, netPayable: 0 }))
+      prevJobs.map((job) =>
+        job.id === id ? { ...job, completionLink: link } : job
+      )
     );
-    alert("Withdrawal successful!");
   };
 
   return (
     <div className="dashboard-container">
       <h2>Messenger Dashboard</h2>
+      <p><strong>Total Earnings:</strong> ${totalEarnings}</p>
 
-      <div className="jobs-list">
-        <h3>Jobs Assigned</h3>
-        {jobs.length > 0 ? (
-          jobs.map((job) => (
-            <div key={job.id} className="job-item">
-              <p>
-                <strong>Job:</strong> {job.title}
-              </p>
-              <p>
-                <strong>Status:</strong> {job.status}
-              </p>
-              {job.status === "Assigned" && (
-                <div>
-                  <button
-                    onClick={() => handleAccept(job.id)}
-                    className="dashboard-btn"
-                  >
-                    Accept Job
-                  </button>
-                  <button
-                    onClick={() => handleReject(job.id)}
-                    className="dashboard-btn reject-btn"
-                  >
-                    Reject Job
-                  </button>
-                </div>
-              )}
-              {job.status === "Accepted" && (
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Paste completion link"
-                    onBlur={(e) => handleCompletion(job.id, e.target.value)}
-                    className="completion-input"
-                  />
-                  <p>
-                    <strong>Net Payable:</strong> ${job.netPayable}
-                  </p>
-                </div>
-              )}
-              {job.status === "Completed" && (
-                <div>
-                  <p>
-                    <strong>Completion Link:</strong> {job.completionLink}
-                  </p>
-                  <p>
-                    <strong>Net Payable:</strong> ${job.netPayable}
-                  </p>
-                </div>
-              )}
+      <h3>Available Jobs</h3>
+      <div className="jobs-grid">
+        {jobs.filter((job) => job.status === "Assigned").map((job) => (
+          <div key={job.id} className="job-card">
+            <p><strong>Job:</strong> {job.job}</p>
+            <p><strong>Status:</strong> {job.status}</p>
+            <p><strong>Amount:</strong> ${job.amount}</p>
+
+            {expandedJobId === job.id && (
+              <div className="job-details">
+                <p><strong>Description:</strong> {job.description}</p>
+              </div>
+            )}
+
+            <button
+              className="toggle-details-button"
+              onClick={() =>
+                setExpandedJobId(expandedJobId === job.id ? null : job.id)
+              }
+            >
+              {expandedJobId === job.id ? "Hide Details" : "Show Details"}
+            </button>
+
+            <div className="button-group">
+              <button
+                className="accept-button"
+                onClick={() => handleAcceptJob(job.id)}
+              >
+                Accept Job
+              </button>
+              <button
+                className="reject-button"
+                onClick={() => handleRejectJob(job.id)}
+              >
+                Reject Job
+              </button>
             </div>
-          ))
-        ) : (
-          <p>No jobs available.</p>
-        )}
+          </div>
+        ))}
       </div>
 
-      <div className="withdraw-section">
-        <h3>Net Payable: ${jobs.reduce((acc, job) => acc + job.netPayable, 0)}</h3>
-        <button onClick={handleWithdraw} className="dashboard-btn">
-          Withdraw Money
-        </button>
-        <p>Total Withdrawn: ${withdrawnAmount}</p>
+      <h3>Accepted Jobs</h3>
+      <div className="jobs-grid">
+        {acceptedJobs.map((job) => (
+          <div key={job.id} className="job-card">
+            <p><strong>Job:</strong> {job.job}</p>
+            <p><strong>Status:</strong> {job.status}</p>
+            <p><strong>Amount:</strong> ${job.amount}</p>
+
+            <div className="job-details">
+              <label>
+                <strong>Completion Link:</strong>
+                <input
+                  type="text"
+                  value={job.completionLink}
+                  onChange={(e) => handleLinkChange(job.id, e.target.value)}
+                  placeholder="Enter link here"
+                />
+              </label>
+              <button
+                className="complete-button"
+                onClick={() => handleCompleteJob(job.id)}
+              >
+                Mark as Completed
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3>Completed Jobs</h3>
+      <div className="jobs-grid">
+        {completedJobs.map((job) => (
+          <div key={job.id} className="job-card">
+            <p><strong>Job:</strong> {job.job}</p>
+            <p><strong>Status:</strong> {job.status}</p>
+            <p><strong>Amount:</strong> ${job.amount}</p>
+            <p><strong>Completion Link:</strong> {job.completionLink}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/* Base Styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -7,7 +8,7 @@ html, body {
 #root {
   height: 100%; /* Ensure React's root container spans the full height */
 }
-/* General Styles */
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -31,6 +32,12 @@ body {
   font-size: 1.8em;
   font-weight: bold;
   letter-spacing: 1px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #f0f0f0; /* Lighten the text color slightly on hover */
 }
 
 .nav-links .btn {
@@ -150,15 +157,8 @@ body {
   color: #005ea8;
   text-decoration: none;
 }
-.logo {
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
 
-.logo:hover {
-  color: #f0f0f0; /* Lighten the text color slightly on hover */
-}
-/* Container for the table */
+/* Table Styles */
 .table-container {
   display: flex;
   flex-direction: column;
@@ -171,15 +171,11 @@ body {
   box-sizing: border-box;
 }
 
-
-
-/* Heading style */
 .table-container h2 {
   color: #0078d7;
   margin-bottom: 20px;
 }
 
-/* Table styles */
 .styled-table {
   width: 100%;
   border-collapse: collapse;
@@ -188,7 +184,6 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-/* Header styles */
 .styled-table thead tr {
   background-color: #0078d7;
   color: white;
@@ -201,7 +196,6 @@ body {
   border: 1px solid #ddd;
 }
 
-/* Row styles */
 .styled-table tbody tr:nth-child(even) {
   background-color: #f4f4f9;
 }
@@ -210,6 +204,8 @@ body {
   background-color: #e8eff1;
   cursor: pointer;
 }
+
+/* Dashboard Styles */
 .dashboard-container {
   padding: 20px;
   max-width: 800px;
@@ -219,16 +215,89 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.jobs-list {
-  margin-bottom: 20px;
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-.job-item {
+.job-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 15px;
-  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.job-card p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.accept-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.accept-button:hover {
+  background-color: #45a049;
+}
+
+.reject-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reject-button:hover {
+  background-color: #e53935;
+}
+
+@media (max-width: 600px) {
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .accept-button,
+  .reject-button {
+    width: 100%;
+  }
+}
+
+/* Additional Styles */
+.completion-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background: #f9f9f9;
+}
+
+.withdraw-section {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .dashboard-btn {
@@ -254,17 +323,107 @@ body {
   background-color: #c9302c;
 }
 
-.completion-input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.home-section {
+  background-color: #444;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://scontent.frdp4-1.fna.fbcdn.net/v/t39.30808-6/348231807_249642317657529_6749770682651908866_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=2NR9fv5Y-qMQ7kNvgHwlAGa&_nc_zt=23&_nc_ht=scontent.frdp4-1.fna&_nc_gid=AUBJaJqDGGQaZqZ96IgBcRz&oh=00_AYDko58HKAmVurspJzM1FYBliTThnHOomlzhcXhZyPpFpg&oe=67749C8A');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.withdraw-section {
+.home-content {
   text-align: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+}
+
+.home-header {
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-size: 3rem;
+  color: #fff;
+}
+
+.main-name {
+  color: #ffcc00;
+}
+
+.typewriter-container {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #ffcc00;
+}
+
+.home-logo {
   margin-top: 20px;
 }
 
+.home-img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.9;
+}
 
+.home-about-section {
+  background-color: #222;
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+}
+
+.about-heading {
+  font-size: 2.5rem;
+  color: #ffcc00;
+}
+
+.home-about-body {
+  font-size: 1.3rem;
+  line-height: 1.8;
+}
+
+.avatar-img {
+  max-width: 200px;
+  border-radius: 50%;
+  border: 3px solid #ffcc00;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-icon {
+  font-size: 1.2rem;
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  text-decoration: underline;
+}
