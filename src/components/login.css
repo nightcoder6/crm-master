@@ -1,0 +1,80 @@
+/* Login Form Container */
+.form-container {
+  max-width: 400px;
+  margin: 50px auto; /* Center horizontally with a top margin */
+  padding: 30px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  text-align: left;
+}
+
+/* Heading */
+.form-container h2 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block; /* Ensure labels are above the input fields */
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%; /* Make input fields span the full width */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #0078d7; /* Highlight border on focus */
+}
+
+/* Login Button */
+.form-btn {
+  width: 100%; /* Full width for the button */
+  padding: 10px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.form-btn:hover {
+  background-color: #005ea8;
+}
+
+/* Signup Link */
+.switch-btn {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #0078d7;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.switch-btn:hover {
+  color: #005ea8;
+}

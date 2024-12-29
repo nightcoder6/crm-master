@@ -1,0 +1,66 @@
+/* navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex-wrap: nowrap; /* Ensure the navbar does not wrap its content */
+    overflow: hidden; /* Prevent overflow issues */
+  }
+  
+  .logo a {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: center; /* Align buttons vertically */
+  }
+  
+  .nav-links .btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .btn.login {
+    background-color: white;
+    color: #0078d7;
+  }
+  
+  .btn.signup {
+    background-color: #005ea8;
+    color: white;
+  }
+  
+  .btn.login:hover,
+  .btn.signup:hover {
+    background-color: #003f7f;
+    color: white;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-wrap: wrap; /* Allow wrapping */
+      justify-content: center; /* Center buttons when stacked */
+    }
+  
+    .nav-links .btn {
+      width: 100%; /* Make buttons take full width */
+      text-align: center;
+      margin: 5px 0; /* Add spacing between stacked buttons */
+    }
+  }
+  

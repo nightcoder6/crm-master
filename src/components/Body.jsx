@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./body.css";
 
 const Home = () => {
   const [showButtons, setShowButtons] = useState(true);
@@ -7,6 +8,7 @@ const Home = () => {
   return (
     <section>
       <div className="home-section" id="home">
+        {/* Home Content */}
         <div className="home-content">
           <div className="home-header">
             <h1 className="heading">
@@ -19,15 +21,18 @@ const Home = () => {
               <Typewriter />
             </div>
           </div>
-          <div className="home-logo">
-            <img
-              src="https://scontent.frdp4-1.fna.fbcdn.net/v/t39.30808-6/348231807_249642317657529_6749770682651908866_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=2NR9fv5Y-qMQ7kNvgHwlAGa&_nc_zt=23&_nc_ht=scontent.frdp4-1.fna&_nc_gid=AUBJaJqDGGQaZqZ96IgBcRz&oh=00_AYDko58HKAmVurspJzM1FYBliTThnHOomlzhcXhZyPpFpg&oe=67749C8A"
-              alt="home"
-              className="home-img"
-            />
-          </div>
+        </div>
+
+        {/* Background Image */}
+        <div className="home-logo">
+          <img
+            src="https://scontent.frdp4-1.fna.fbcdn.net/v/t39.30808-6/348231807_249642317657529_6749770682651908866_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=2NR9fv5Y-qMQ7kNvgHwlAGa&_nc_zt=23&_nc_ht=scontent.frdp4-1.fna&_nc_gid=AUBJaJqDGGQaZqZ96IgBcRz&oh=00_AYDko58HKAmVurspJzM1FYBliTThnHOomlzhcXhZyPpFpg&oe=67749C8A"
+            alt="home"
+            className="home-img"
+          />
         </div>
       </div>
+
       <AboutSection />
       {showButtons && (
         <div className="navigation-buttons">

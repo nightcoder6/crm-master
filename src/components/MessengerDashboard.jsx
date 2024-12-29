@@ -62,6 +62,50 @@ const MessengerDashboard = () => {
       <h2>Messenger Dashboard</h2>
       <p><strong>Total Earnings:</strong> ${totalEarnings}</p>
 
+      {/* Completed Jobs */}
+      <h3>Completed Jobs</h3>
+      <div className="jobs-grid">
+        {completedJobs.map((job) => (
+          <div key={job.id} className="job-card">
+            <p><strong>Job:</strong> {job.job}</p>
+            <p><strong>Status:</strong> {job.status}</p>
+            <p><strong>Amount:</strong> ${job.amount}</p>
+            <p><strong>Completion Link:</strong> {job.completionLink}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Accepted Jobs */}
+      <h3>Accepted Jobs</h3>
+      <div className="jobs-grid">
+        {acceptedJobs.map((job) => (
+          <div key={job.id} className="job-card">
+            <p><strong>Job:</strong> {job.job}</p>
+            <p><strong>Status:</strong> {job.status}</p>
+            <p><strong>Amount:</strong> ${job.amount}</p>
+
+            <div className="job-details">
+              <label>
+                <strong>Completion Link:</strong>
+                <input
+                  type="text"
+                  value={job.completionLink}
+                  onChange={(e) => handleLinkChange(job.id, e.target.value)}
+                  placeholder="Enter link here"
+                />
+              </label>
+              <button
+                className="complete-button"
+                onClick={() => handleCompleteJob(job.id)}
+              >
+                Mark as Completed
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Available Jobs */}
       <h3>Available Jobs</h3>
       <div className="jobs-grid">
         {jobs.filter((job) => job.status === "Assigned").map((job) => (
@@ -99,47 +143,6 @@ const MessengerDashboard = () => {
                 Reject Job
               </button>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <h3>Accepted Jobs</h3>
-      <div className="jobs-grid">
-        {acceptedJobs.map((job) => (
-          <div key={job.id} className="job-card">
-            <p><strong>Job:</strong> {job.job}</p>
-            <p><strong>Status:</strong> {job.status}</p>
-            <p><strong>Amount:</strong> ${job.amount}</p>
-
-            <div className="job-details">
-              <label>
-                <strong>Completion Link:</strong>
-                <input
-                  type="text"
-                  value={job.completionLink}
-                  onChange={(e) => handleLinkChange(job.id, e.target.value)}
-                  placeholder="Enter link here"
-                />
-              </label>
-              <button
-                className="complete-button"
-                onClick={() => handleCompleteJob(job.id)}
-              >
-                Mark as Completed
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <h3>Completed Jobs</h3>
-      <div className="jobs-grid">
-        {completedJobs.map((job) => (
-          <div key={job.id} className="job-card">
-            <p><strong>Job:</strong> {job.job}</p>
-            <p><strong>Status:</strong> {job.status}</p>
-            <p><strong>Amount:</strong> ${job.amount}</p>
-            <p><strong>Completion Link:</strong> {job.completionLink}</p>
           </div>
         ))}
       </div>

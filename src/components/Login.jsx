@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
